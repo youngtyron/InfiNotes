@@ -1,0 +1,7 @@
+Django==2.2.4
+djangorestframework==3.10.2
+Markdown==3.1.1
+pkg-resources==0.0.0
+pymongo==3.9.0
+pytz==2019.2
+sqlparse==0.3.0
