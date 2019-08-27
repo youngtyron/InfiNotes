@@ -3,9 +3,11 @@ from django.contrib.auth.models import User
 from rest_framework.renderers import JSONRenderer
 from .serializers import ThemeSerializer
 from .models import Theme
-from .mongo import database, collection_name, documents, MongoJSONEncoder
+from .mongo import NotesMongoHandler, MongoJSONEncoder
 
 # Create your views here.
+
+
 
 def themes_list(request):
 	user = User.objects.first()
@@ -16,6 +18,6 @@ def themes_list(request):
 
 def notes_list(request, theme_id):
 	user_id = 1
-	notes = list(documents(user_id, theme_id))
+	notes = list(NotesMongoHandler.get_documents(user_id, theme_id))
 	data = MongoJSONEncoder().encode(notes)
 	return HttpResponse(data, content_type='json')

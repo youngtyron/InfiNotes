@@ -60,8 +60,6 @@ CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
 CSRF_TRUSTED_ORIGINS = ['localhost:3000']
 # CORS_URLS_REGEX = r'^/api/.*$'
 
-
-
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -82,6 +80,13 @@ CORS_ALLOW_METHODS = [
 #     'x-csrftoken',
 #     'x-requested-with',
 # ]
+
+MONGO_HOST = "localhost"
+MONGO_PORT = 27017
+MONGO_DB = "my_documents_base"
+MONGO_USER = "my_documents_user"
+MONGO_PASS = "my_documents_password"
+
 
 ROOT_URLCONF = 'infinotes.urls'
 
