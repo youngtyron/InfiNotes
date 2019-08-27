@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './InfiNotes.scss';
 
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Themes from './Themes';

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Notes from './Notes';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 class Themes extends Component {
@@ -19,7 +18,6 @@ class Themes extends Component {
       .then(response => {
         this.setState({themes: response.data});
       })
-    console.log('Theme Component')
   };
 
   render() {
@@ -28,7 +26,7 @@ class Themes extends Component {
         <ul className='list-group'>
           {this.state.themes.map((theme) =>
             <li className="list-group-item" key={theme.id}>
-              <Link to={`/notes/${theme.id}`}><p>{theme.title}</p></Link>
+              <Link className="theme-link" to={`/notes/${theme.id}`}><p>{theme.title}</p></Link>
             </li>
           )}
         </ul>

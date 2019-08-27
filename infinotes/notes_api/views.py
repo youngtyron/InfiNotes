@@ -17,7 +17,5 @@ def themes_list(request):
 def notes_list(request, theme_id):
 	user_id = 1
 	notes = list(documents(user_id, theme_id))
-	for note in notes:
-		print(note)
 	data = MongoJSONEncoder().encode(notes)
 	return HttpResponse(data, content_type='json')

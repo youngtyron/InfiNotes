@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Route, Link } from 'react-router-dom';
-
+// import { Route, Link } from 'react-router-dom';
 
 class Notes extends Component {
 
@@ -27,9 +26,9 @@ class Notes extends Component {
         <ul className='list-group'>
           {this.state.notes.map((note) =>
             <li className="list-group-item" key={note.index}>
-              <h4>{note.subtheme}</h4>
-              <p>{note.text}</p>
-              <p style={{fonеStyle: "oblique"}}>{note.footnote}</p>
+              <h4 className="subtheme">{note.subtheme}</h4>
+              <p className="textnote">{note.text}</p>
+              <p className='footnote'>{note.footnote}</p>
             </li>
           )}
         </ul>
