@@ -1,15 +1,13 @@
 import json
 from bson import ObjectId
 from pymongo import MongoClient
-from infinotes.settings import MONGO_DB, MONGO_PORT, MONGO_HOST, MONGO_PASS, MONGO_USER
+from .mongo_main import MongoDatabase
 
 class NotesMongoHandler(object):
 
     @staticmethod
     def database():
-        client = MongoClient(MONGO_HOST, MONGO_PORT)
-        db = client[MONGO_DB]
-        db.authenticate(MONGO_USER, MONGO_PASS)
+        db = MongoDatabase().connect()
         return db
 
     @classmethod

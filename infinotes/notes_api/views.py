@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework.renderers import JSONRenderer
 from .serializers import ThemeSerializer
 from .models import Theme
-from .mongo import NotesMongoHandler, MongoJSONEncoder
+from .mongo_handler import NotesMongoHandler, MongoJSONEncoder
 
 # Create your views here.
 
