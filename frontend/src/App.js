@@ -1,11 +1,28 @@
 import React from 'react';
 import './App.css';
 import './InfiNotes.scss';
+import cookie from 'react-cookies'
 
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Themes from './Themes';
 import Auth from './Auth';
 import Notes from './Notes';
+
+function LoggingLink() {
+  const isLoggedIn = cookie.load('token');
+  if (isLoggedIn) {
+    return <p>You are logged</p>;
+  }
+  return <Link to="/login">Login</Link>;
+}
+
+function LoggingRoute() {
+  const isLoggedIn = cookie.load('token');
+  if (isLoggedIn) {
+    return <p>You are logged</p>;
+  }
+  return <Route path="/login" exact component={Auth}/>;
+}
 
 function App() {
   return (
@@ -14,11 +31,11 @@ function App() {
         <BrowserRouter>
           <header>
             <Link to="/themes">Themes</Link>
-            <Link to="/login">Login</Link>
+            <LoggingLink />
           </header>
           <div className="row">
             <Route path="/themes" exact component={Themes}/>
-            <Route path="/login" exact component={Auth}/>
+            <LoggingRoute />
             <Route path="/notes/:theme_id" exact render={
               (props) => <Notes {...props}/>
             }/>

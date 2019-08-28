@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import cookie from 'react-cookies'
 
 class Auth extends Component {
 
@@ -9,13 +10,13 @@ class Auth extends Component {
               username: '',
               password: '',
             };
-            
+
     this.handleChangeUsername = this.handleChangeUsername.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  
+
 
 
   handleChangeUsername(event) {
@@ -28,13 +29,14 @@ class Auth extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    axios.post(`http://localhost:8000/auth/token/create`, {
-        username: this.username,
-        password: this.password
+    axios.post(`http://localhost:8000/api-token-auth/`, {
+        username: this.state.username,
+        password: this.state.password
       })
      .then(response => {
-       console.log(response)
-    })
+       var token = response.data['token']
+       cookie.save('token', token)
+    });
 
   };
 

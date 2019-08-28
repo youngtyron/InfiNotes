@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import cookie from 'react-cookies'
 
 
 class Themes extends Component {
@@ -14,7 +15,10 @@ class Themes extends Component {
 
 
   componentDidMount() {
-    axios.get(`http://localhost:8000/api/themes`)
+    console.log(cookie.load('token'))
+    axios.get(`http://localhost:8000/api/themes/`, {
+        headers: { Authorization: "Token " + cookie.load("token") }
+    })
       .then(response => {
         this.setState({themes: response.data});
       })
