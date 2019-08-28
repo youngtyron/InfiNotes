@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    # 'djoser',
 
     'notes_api',
 ]
@@ -131,14 +130,16 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
     ],
-    # 'EXCEPION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
+    'EXCEPION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
 
 }
-
-AUTHENTICATION_BACKENDS = (
-    'rest_framework.authentication.TokenAuthentication',
-)
+#
+# AUTHENTICATION_BACKENDS = (
+#     'rest_framework.authentication.TokenAuthentication',
+# )
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

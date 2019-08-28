@@ -12,8 +12,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def themes_list(request, format=None):
-	user = User.objects.first()
-	print(request.user)
+	user = request.user
 	themes = Theme.objects.filter(user = request.user)
 	serializer = ThemeSerializer(themes, many=True)
 	data = JSONRenderer().render(serializer.data)
