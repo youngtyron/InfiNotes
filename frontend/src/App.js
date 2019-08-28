@@ -2,48 +2,61 @@ import React from 'react';
 import './App.css';
 import './InfiNotes.scss';
 import cookie from 'react-cookies'
-
+import { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Themes from './Themes';
-import Auth from './Auth';
+import Login from './Login';
+import Logout from './Logout';
 import Notes from './Notes';
 
-function LoggingLink() {
-  const isLoggedIn = cookie.load('token');
-  if (isLoggedIn) {
-    return <p>You are logged</p>;
-  }
-  return <Link to="/login">Login</Link>;
-}
 
-function LoggingRoute() {
-  const isLoggedIn = cookie.load('token');
-  if (isLoggedIn) {
-    return <p>You are logged</p>;
-  }
-  return <Route path="/login" exact component={Auth}/>;
-}
+class App extends Component {
 
-function App() {
-  return (
-    <div className="App">
-      <div className="container">
-        <BrowserRouter>
-          <header>
-            <Link to="/themes">Themes</Link>
-            <LoggingLink />
-          </header>
-          <div className="row">
-            <Route path="/themes" exact component={Themes}/>
-            <LoggingRoute />
-            <Route path="/notes/:theme_id" exact render={
-              (props) => <Notes {...props}/>
-            }/>
-          </div>
-        </BrowserRouter>
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false
+    };
+  };
+
+  componentDidMount(){
+    if (cookie.load('token')){
+      this.setState({isLoggedIn: true})
+    }
+  }
+
+  updateLogged = (value) => {
+    this.setState({ logged: value })
+    console.log('Updated!')
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <div className="container">
+          <BrowserRouter>
+            <header>
+              <Link to="/themes">Themes</Link>
+              {this.state.isLoggedIn ? (
+                <Logout updateLogged={this.updateLogged}/>
+              ) : (
+                <Link to="/login">Login</Link>
+              )}
+            </header>
+            <div className="row">
+              <Route path="/themes" exact component={Themes}/>
+              {!this.state.isLoggedIn &&
+                <Route path="/login" exact component={Login}/>
+              }
+              <Route path="/notes/:theme_id" exact render={
+                (props) => <Notes {...props}/>
+              }/>
+            </div>
+          </BrowserRouter>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

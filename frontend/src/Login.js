@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import cookie from 'react-cookies'
 
-class Auth extends Component {
+class Login extends Component {
 
   constructor(props) {
     super(props);
@@ -15,9 +15,6 @@ class Auth extends Component {
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-
-
 
   handleChangeUsername(event) {
     this.setState({username: event.target.value});
@@ -34,15 +31,12 @@ class Auth extends Component {
         password: this.state.password
       })
      .then(response => {
-       var token = response.data['token']
-       cookie.save('token', token)
+       var token = response.data['token'];
+       cookie.save('token', token);
+       // this.props.updateData(true);
     });
 
   };
-
-  componentDidMount() {
-
-  }
 
   render() {
     return (
@@ -67,4 +61,4 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+export default Login;

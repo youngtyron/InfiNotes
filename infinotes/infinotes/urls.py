@@ -10,4 +10,5 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('api/', include('notes_api.urls')),
     path('api-token-auth/', obtain_auth_token),
+    path('logout/', views.logout),
 ]
