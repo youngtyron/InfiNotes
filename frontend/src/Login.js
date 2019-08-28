@@ -24,7 +24,7 @@ class Login extends Component {
     this.setState({password: event.target.value});
   };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     axios.post(`http://localhost:8000/api-token-auth/`, {
         username: this.state.username,
@@ -33,9 +33,8 @@ class Login extends Component {
      .then(response => {
        var token = response.data['token'];
        cookie.save('token', token);
-       // this.props.updateData(true);
+       this.props.updateLogged(true);
     });
-
   };
 
   render() {

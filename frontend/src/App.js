@@ -26,8 +26,7 @@ class App extends Component {
   }
 
   updateLogged = (value) => {
-    this.setState({ logged: value })
-    console.log('Updated!')
+    this.setState({ isLoggedIn: value })
   }
 
   render() {
@@ -46,7 +45,9 @@ class App extends Component {
             <div className="row">
               <Route path="/themes" exact component={Themes}/>
               {!this.state.isLoggedIn &&
-                <Route path="/login" exact component={Login}/>
+                <Route path="/login" exact
+                  render={(props) => <Login {...props} updateLogged={this.updateLogged} />
+                }/>
               }
               <Route path="/notes/:theme_id" exact render={
                 (props) => <Notes {...props}/>
