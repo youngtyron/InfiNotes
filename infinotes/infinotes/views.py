@@ -9,6 +9,5 @@ def index(request):
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def logout(request, format=None):
-	print('LOGOUT')
 	request.user.auth_token.delete()
 	return HttpResponse(status=200)

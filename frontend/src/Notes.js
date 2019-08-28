@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import cookie from 'react-cookies';
+import NoteForm from './NoteForm';
+
 // import { Route, Link } from 'react-router-dom';
 
 class Notes extends Component {
@@ -11,11 +14,17 @@ class Notes extends Component {
     };
   };
 
+  newNote = (newnote) => {
+    this.setState(prevState => ({
+      notes: [...prevState.notes, newnote]
+    }))
+  }
 
   componentDidMount() {
     var theme_id = this.props.match.params.theme_id
-    axios.get(`http://localhost:8000/api/notes/`+ theme_id)
-      .then(response => {
+    axios.get(`http://localhost:8000/api/theme/`+ theme_id + '/notes/', {
+        headers: { Authorization: "Token " + cookie.load("token") }
+    }).then(response => {
         this.setState({notes: response.data});
       })
   };
@@ -23,6 +32,7 @@ class Notes extends Component {
   render() {
     return (
       <div>
+        <NoteForm newNote={this.newNote} theme_id={this.props.match.params.theme_id}/>
         <ul className='list-group'>
           {this.state.notes.map((note) =>
             <li className="list-group-item" key={note.index}>
