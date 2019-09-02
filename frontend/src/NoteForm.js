@@ -8,6 +8,8 @@ class NoteForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+            open_subtheme: false,
+            open_footnote: false,
             subtheme: '',
             text: '',
             footnote: ''
@@ -28,7 +30,12 @@ class NoteForm extends Component {
   handleChangeFootnote(event) {
     this.setState({footnote: event.target.value});
   };
-
+  openSubtheme = () => {
+    this.setState({open_subtheme: true});
+  };
+  openFootnote = () => {
+    this.setState({open_footnote: true});
+  };
   handleSubmit = (event) => {
     event.preventDefault();
     var theme_id = this.props.theme_id
@@ -50,18 +57,32 @@ class NoteForm extends Component {
     return (
       <div className="col">
           <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="exampleInputSubtheme">Subtheme</label>
-              <input type="text" value={this.state.subtheme} onChange={this.handleChangeSubtheme} className="form-control" id="exampleInputSubtheme" aria-describedby="subthemeHelp" placeholder="Enter subtheme"/>
-            </div>
+            {!this.state.open_subtheme &&
+              <div className="form-group" onClick={this.openSubtheme}>
+                <p>Add subtheme</p>
+              </div>
+            }
+            {!this.state.open_footnote &&
+              <div className="form-group" onClick={this.openFootnote}>
+                <p>Add footnote</p>
+              </div>
+            }
+            {this.state.open_subtheme &&
+              <div className="form-group">
+                <label htmlFor="exampleInputSubtheme">Subtheme</label>
+                <input type="text" value={this.state.subtheme} onChange={this.handleChangeSubtheme} className="form-control" id="exampleInputSubtheme" aria-describedby="subthemeHelp" placeholder="Enter subtheme"/>
+              </div>
+            }
             <div className="form-group">
               <label htmlFor="exampleInputText">Text</label>
               <input type="text" value={this.state.text} onChange={this.handleChangeText} className="form-control" id="exampleInputText" aria-describedby="textHelp" placeholder="Enter text"/>
             </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputFootnote">Footnote</label>
-              <input type="text" value={this.state.footnote} onChange={this.handleChangeFootnote} className="form-control" id="exampleInputFootnote" aria-describedby="footnoteHelp" placeholder="Enter footnote"/>
-            </div>
+            {this.state.open_footnote &&
+              <div className="form-group">
+                <label htmlFor="exampleInputFootnote">Footnote</label>
+                <input type="text" value={this.state.footnote} onChange={this.handleChangeFootnote} className="form-control" id="exampleInputFootnote" aria-describedby="footnoteHelp" placeholder="Enter footnote"/>
+              </div>
+            }
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>
       </div>
