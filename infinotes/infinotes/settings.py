@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-
+    'djongo',
     'notes_api',
 ]
 
@@ -88,6 +88,8 @@ MONGO_DB = "my_documents_base"
 MONGO_USER = "my_documents_user"
 MONGO_PASS = "my_documents_password"
 
+DATABASE_ROUTERS = ['notes_api.router.ModelMetaRouter']
+
 
 ROOT_URLCONF = 'infinotes.urls'
 
@@ -117,6 +119,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'mongo': {
+        'ENGINE' : 'djongo',
+        'NAME' : 'my_documents_base',
+        'USER' : 'my_documents_user',
+        'PASSWORD': 'my_documents_password',
+        'HOST' : "127.0.0.1",
+        'PORT' : 27017
     }
 }
 
