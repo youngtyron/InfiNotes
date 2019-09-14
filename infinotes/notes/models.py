@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from djongo import models as djongomodels
 import django.db.models.options as options
 options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('in_db',)
-# from djongo.models import forms as djongoforms
 
 # Create your models here.
 class Theme(models.Model):
@@ -25,9 +24,6 @@ class Note(djongomodels.Model):
 
 	def __str__(self):
 		return self.headline
-
-	def create(self, headline, subtheme, text, footnote):
-		pass
 
 	class Meta:
 		in_db = 'mongo'

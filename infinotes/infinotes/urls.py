@@ -7,8 +7,9 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('docadmin/', include('docadmin.urls', namespace='docadmin')),
     path('', views.index, name="index"),
-    path('api/', include('notes_api.urls')),
+    path('api/', include('notes.urls')),
     path('api-token-auth/', obtain_auth_token),
     path('logout/', views.logout),
 ]

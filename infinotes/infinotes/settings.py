@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'djongo',
-    'notes_api',
+    'notes',
+    'docadmin'
 ]
 
 MIDDLEWARE = [
@@ -88,7 +89,7 @@ MONGO_DB = "my_documents_base"
 MONGO_USER = "my_documents_user"
 MONGO_PASS = "my_documents_password"
 
-DATABASE_ROUTERS = ['notes_api.router.ModelMetaRouter']
+DATABASE_ROUTERS = ['notes.router.ModelMetaRouter']
 
 
 ROOT_URLCONF = 'infinotes.urls'

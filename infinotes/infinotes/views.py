@@ -11,3 +11,5 @@ def index(request):
 def logout(request, format=None):
 	request.user.auth_token.delete()
 	return HttpResponse(status=200)
+
+# class DocAdminView()
