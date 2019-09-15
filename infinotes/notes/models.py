@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from djongo import models as djongomodels
 import django.db.models.options as options
 options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('in_db',)
+from . import operations
 
 # Create your models here.
 class Theme(models.Model):
@@ -21,9 +22,14 @@ class Note(djongomodels.Model):
 	text = djongomodels.TextField()
 	footnote = djongomodels.TextField()
 	date = djongomodels.DateField(auto_now_add=True)
+	objects = djongomodels.DjongoManager()
+
+	class Meta:
+		in_db = 'mongo'
 
 	def __str__(self):
 		return self.headline
 
-	class Meta:
-		in_db = 'mongo'
+	def save(self, *args, **kwargs):
+		operations.insert_in_collection(self)
+		return self
