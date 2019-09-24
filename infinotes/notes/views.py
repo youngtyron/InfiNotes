@@ -3,11 +3,16 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from rest_framework.renderers import JSONRenderer
 from .serializers import ThemeSerializer
-from .models import Theme
+from .models import Theme, Note
 from .mongo_handler import NotesMongoHandler, MongoJSONEncoder
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def test_dev_func(request, format=None):
+	all = Note.all('test_headline2')
+	return HttpResponse({'foo':'bar'}, content_type='json')
 
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))

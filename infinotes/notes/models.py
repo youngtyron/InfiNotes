@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.http import QueryDict
 from djongo import models as djongomodels
 import django.db.models.options as options
 options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('in_db',)
 from . import operations
 
-# Create your models here.
+
 class Theme(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	title = models.CharField(max_length=256)
@@ -30,6 +31,23 @@ class Note(djongomodels.Model):
 	def __str__(self):
 		return self.headline
 
+	def __init__(self, *args, **kwargs):
+		self.headline = kwargs['headline']
+		self.subtheme = kwargs['subtheme']
+		self.text = kwargs['text']
+		self.footnote = kwargs['footnote']
+		self.date = kwargs['date']
+		return
+
 	def save(self, *args, **kwargs):
 		operations.insert_in_collection(self)
 		return self
+
+	@classmethod
+	def all(cls, collection):
+		raw_queryset = operations.get_all_in_collection(collection)
+		list = []
+		for q in raw_queryset:
+			note = Note(headline=q['headline'], subtheme=q['subtheme'], text=q['text'],footnote=q['footnote'],date=q['date'])
+			list.append(note)
+		return list
