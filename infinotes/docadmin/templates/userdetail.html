@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <p>UserDetail</p>
+
+  <p>Username: {{user.username}}</p>
+  <p>First Name: {{user.first_name}}</p>
+  <p>Last Name: {{user.last_name}}</p>
+  <p>Email: {{user.email}}</p>
+  <p>Themes count: {{themes_count}}</p>
+  <a href="{% url 'docadmin:themelist' user.id %}">Themes</a>
+
+{% endblock %}

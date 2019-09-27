@@ -4,4 +4,5 @@ from .models import Note
 class NoteAdminForm(ModelForm):
     class Meta:
         model = Note
-        fields = ['headline', 'subtheme', 'text', 'footnote']
+        fields = ['subtheme', 'text', 'footnote']
+        # fields = ['headline', 'subtheme', 'text', 'footnote']

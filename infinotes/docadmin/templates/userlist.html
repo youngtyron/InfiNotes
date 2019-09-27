@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <p>UserList</p>
+
+
+  <ul>
+
+    {% for user in object_list %}
+        <li>
+          <a href="{% url 'docadmin:userdetail' user.id %}"><p>{{user.username}}</p></a>
+        </li>
+    {% empty %}
+        <li>No users yet.</li>
+    {% endfor %}
+
+  </ul>
+
+{% endblock %}

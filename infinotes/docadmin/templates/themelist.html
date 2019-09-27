@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <p>ThemeList</p>
+
+
+  <ul>
+
+    {% for theme in object_list %}
+        <li>
+          <a href="{% url 'docadmin:notelist' theme.id %}"><p>{{theme.title}}</p></a>
+        </li>
+    {% empty %}
+        <li>No themes yet.</li>
+    {% endfor %}
+
+  </ul>
+
+{% endblock %}
